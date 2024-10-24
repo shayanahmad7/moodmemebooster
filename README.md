@@ -4,6 +4,10 @@
 
 Meme Mood Booster is a React web application designed to lift your spirits by providing memes based on your current mood. This project addresses the semi-regular problem of needing a quick mood boost or distraction during the day.
 
+**Live Demo:** [https://moodmemebooster.vercel.app/](https://moodmemebooster.vercel.app/)
+
+**Note:** This project was developed as an assignment for the Projects in Programming Class at New York University (NYU).
+
 ## 🎯 Problem It Solves
 
 In our fast-paced world, we often need a quick way to improve our mood or take a short mental break. Meme Mood Booster solves this by:
