@@ -79,7 +79,7 @@ export default function MemeMoodBooster() {
             <SelectTrigger className="w-full mb-4">
               <SelectValue placeholder="How are you feeling?" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white">
               {moods.map((m) => (
                 <SelectItem key={m} value={m.toLowerCase()}>{m}</SelectItem>
               ))}
@@ -96,7 +96,7 @@ export default function MemeMoodBooster() {
                 {memes.map((meme, index) => (
                   <CarouselItem key={index}>
                     <div className="p-1">
-                      <Card>
+                      <Card className="bg-white">
                         <CardContent className="flex aspect-square items-center justify-center p-6">
                           <img src={meme.url} alt={meme.title} className="max-w-full max-h-full object-contain" />
                         </CardContent>
@@ -123,7 +123,7 @@ export default function MemeMoodBooster() {
 
           {/* Button to fetch more memes */}
           {mood && (
-            <Button className="w-full mt-4" onClick={fetchMemes}>
+            <Button className="w-full mt-4 bg-black text-white hover:bg-gray-800" onClick={fetchMemes}>
               Get More Memes
             </Button>
           )}

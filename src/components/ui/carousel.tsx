@@ -9,6 +9,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 import { cn } from "../../lib/utils"
 import { Button } from "./button"
 
+// Type definitions for carousel props and API
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
 type CarouselOptions = UseCarouselParameters[0]
@@ -30,8 +31,10 @@ type CarouselContextProps = {
   canScrollNext: boolean
 } & CarouselProps
 
+// Create a context for sharing carousel state and methods
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
 
+// Custom hook for accessing carousel context
 function useCarousel() {
   const context = React.useContext(CarouselContext)
 
@@ -42,6 +45,7 @@ function useCarousel() {
   return context
 }
 
+// Main Carousel component
 const Carousel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & CarouselProps
@@ -58,6 +62,7 @@ const Carousel = React.forwardRef<
     },
     ref
   ) => {
+    // Initialize the embla carousel
     const [carouselRef, api] = useEmblaCarousel(
       {
         ...opts,
@@ -68,6 +73,7 @@ const Carousel = React.forwardRef<
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
 
+    // Update scroll buttons state
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
         return
@@ -77,6 +83,7 @@ const Carousel = React.forwardRef<
       setCanScrollNext(api.canScrollNext())
     }, [])
 
+    // Scroll methods
     const scrollPrev = React.useCallback(() => {
       api?.scrollPrev()
     }, [api])
@@ -85,6 +92,7 @@ const Carousel = React.forwardRef<
       api?.scrollNext()
     }, [api])
 
+    // Handle keyboard navigation
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.key === "ArrowLeft") {
@@ -98,6 +106,7 @@ const Carousel = React.forwardRef<
       [scrollPrev, scrollNext]
     )
 
+    // Set up API and event listeners
     React.useEffect(() => {
       if (!api || !setApi) {
         return
@@ -120,6 +129,7 @@ const Carousel = React.forwardRef<
       }
     }, [api, onSelect])
 
+    // Render the carousel with context provider
     return (
       <CarouselContext.Provider
         value={{
@@ -150,6 +160,7 @@ const Carousel = React.forwardRef<
 )
 Carousel.displayName = "Carousel"
 
+// CarouselContent component
 const CarouselContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -172,6 +183,7 @@ const CarouselContent = React.forwardRef<
 })
 CarouselContent.displayName = "CarouselContent"
 
+// CarouselItem component
 const CarouselItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -194,6 +206,7 @@ const CarouselItem = React.forwardRef<
 })
 CarouselItem.displayName = "CarouselItem"
 
+// CarouselPrevious component (previous button)
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
@@ -223,6 +236,7 @@ const CarouselPrevious = React.forwardRef<
 })
 CarouselPrevious.displayName = "CarouselPrevious"
 
+// CarouselNext component (next button)
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
